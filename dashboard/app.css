@@ -1,0 +1,206 @@
+/* Token Launch Radar: a dark scope face. Deep navy field, phosphor-green signal, amber for the
+   watchlist mark. One accent, one warning colour, tabular numerals everywhere money appears. */
+:root {
+  --field: #070d18;
+  --panel: #0c1524;
+  --panel-2: #101c31;
+  --line: #1d2c47;
+  --ink: #dce7f5;
+  --dim: #8ba0bd;
+  --faint: #5b708e;
+  --signal: #2fe89a;
+  --signal-dim: #14563c;
+  --amber: #ffb454;
+  --rose: #ff7a7a;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--field);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.45;
+}
+main { max-width: 1360px; margin: 0 auto; padding: 28px 28px 40px; }
+
+/* Header: the scope sweep is three soft rings pinned to the corner, drawn with gradients only. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px 30px 22px;
+  background:
+    radial-gradient(circle at 92% -30%, rgba(47, 232, 154, 0.16) 0 90px, transparent 91px),
+    radial-gradient(circle at 92% -30%, transparent 0 150px, rgba(47, 232, 154, 0.08) 151px 152px, transparent 153px),
+    radial-gradient(circle at 92% -30%, transparent 0 230px, rgba(47, 232, 154, 0.06) 231px 232px, transparent 233px),
+    linear-gradient(160deg, var(--panel-2), var(--panel));
+}
+.hero h1 {
+  margin: 0 0 4px;
+  font-size: 30px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+.hero h1 .tick { color: var(--signal); }
+.hero p.lede { margin: 0 0 16px; color: var(--dim); max-width: 72ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--dim);
+  background: rgba(7, 13, 24, 0.55);
+}
+.chip b { color: var(--ink); font-weight: 600; }
+.chip.watch b { color: var(--amber); }
+
+/* The model strip: the whole valuation method, stated on the page where the judge can read it. */
+.model {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  padding: 18px 22px;
+}
+.model h2 { margin: 0 0 6px; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--signal); }
+.model p { margin: 0 0 10px; color: var(--dim); max-width: 96ch; }
+.model p b, .model code { color: var(--ink); }
+.model code { font-family: var(--mono); font-size: 13.5px; }
+.multis { display: flex; flex-wrap: wrap; gap: 6px; }
+.multi {
+  font-family: var(--mono);
+  font-size: 12px;
+  border: 1px solid var(--signal-dim);
+  color: var(--dim);
+  border-radius: 8px;
+  padding: 3px 9px;
+}
+.multi b { color: var(--signal); font-weight: 600; }
+
+/* Tabs and controls. */
+.tabs { display: flex; gap: 8px; margin: 22px 0 0; }
+.tab {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--dim);
+  border-radius: 10px 10px 0 0;
+  border-bottom: none;
+  padding: 9px 18px;
+  font: 600 14px var(--sans);
+  cursor: pointer;
+}
+.tab[aria-selected="true"] { color: var(--ink); background: var(--panel-2); box-shadow: inset 0 2px 0 var(--signal); }
+.sheet {
+  border: 1px solid var(--line);
+  border-radius: 0 14px 14px 14px;
+  background: var(--panel-2);
+  padding: 16px 18px 8px;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+.controls input[type="search"], .controls select {
+  background: var(--field);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 8px 11px;
+  font: 14px var(--sans);
+}
+.controls input[type="search"] { min-width: 230px; }
+.controls label.toggle { display: inline-flex; gap: 7px; align-items: center; color: var(--dim); font-size: 14px; cursor: pointer; }
+.controls .count { margin-left: auto; font-family: var(--mono); font-size: 12.5px; color: var(--faint); }
+
+/* The board table. */
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+thead th.sortable { cursor: pointer; }
+thead th.sortable:hover { color: var(--ink); }
+thead th .dir { color: var(--signal); }
+tbody td { padding: 9px 10px; border-bottom: 1px solid rgba(29, 44, 71, 0.55); vertical-align: middle; }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: rgba(47, 232, 154, 0.05); }
+td.num, th.num { text-align: right; font-family: var(--mono); font-size: 13.5px; white-space: nowrap; }
+td.rank { font-family: var(--mono); color: var(--faint); text-align: right; width: 44px; }
+td.proto b { font-weight: 600; }
+td.proto .slug { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--faint); }
+td .cat { color: var(--dim); font-size: 13.5px; }
+td .chains { color: var(--faint); font-size: 12.5px; font-family: var(--mono); }
+.pos { color: var(--signal); }
+.neg { color: var(--rose); }
+.wmark {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border: 1px solid rgba(255, 180, 84, 0.5);
+  border-radius: 999px;
+  color: var(--amber);
+  font-size: 11px;
+  font-family: var(--mono);
+  vertical-align: 2px;
+}
+.bar { position: relative; height: 5px; border-radius: 3px; background: rgba(47, 232, 154, 0.12); margin-top: 5px; }
+.bar i { position: absolute; inset: 0 auto 0 0; border-radius: 3px; background: var(--signal); }
+.empty { padding: 34px 10px; text-align: center; color: var(--faint); }
+
+/* The detail drawer. */
+.scrim {
+  position: fixed; inset: 0;
+  background: rgba(3, 6, 12, 0.62);
+  opacity: 0; pointer-events: none; transition: opacity 0.15s ease;
+}
+.scrim.open { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(520px, 94vw);
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+  padding: 24px 26px 30px;
+  overflow-y: auto;
+  transform: translateX(102%);
+  transition: transform 0.18s ease;
+  z-index: 5;
+}
+.drawer.open { transform: none; }
+.drawer .close {
+  float: right;
+  appearance: none; border: 1px solid var(--line); background: var(--field);
+  color: var(--dim); border-radius: 8px; padding: 5px 11px; cursor: pointer; font: 13px var(--sans);
+}
+.drawer h2 { margin: 0 30px 2px 0; font-size: 22px; }
+.drawer .dslug { font-family: var(--mono); color: var(--faint); font-size: 12.5px; margin-bottom: 14px; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+.stat { border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; background: var(--panel-2); }
+.stat .k { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+.stat .v { font-family: var(--mono); font-size: 16px; margin-top: 2px; }
+.drawer h3 { font-size: 13px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--signal); margin: 20px 0 8px; }
+.arith { font-family: var(--mono); font-size: 13px; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--field); }
+.arith div { display: flex; justify-content: space-between; gap: 12px; padding: 2.5px 0; color: var(--dim); }
+.arith div.total { border-top: 1px solid var(--line); margin-top: 7px; padding-top: 9px; color: var(--ink); font-size: 14.5px; }
+.arith div.total span:last-child { color: var(--signal); font-weight: 700; }
+ol.plan { margin: 0; padding-left: 20px; }
+ol.plan li { margin-bottom: 10px; color: var(--ink); }
+ol.plan li::marker { color: var(--signal); font-family: var(--mono); }
+.note { color: var(--faint); font-size: 13px; }
+
+footer { margin-top: 26px; color: var(--faint); font-size: 13px; max-width: 100ch; }
+footer b { color: var(--dim); }
+@media (max-width: 900px) {
+  main { padding: 16px 12px 30px; }
+  .hero h1 { font-size: 22px; }
+  td .chains, th.chains, td.age, th.age { display: none; }
+}
